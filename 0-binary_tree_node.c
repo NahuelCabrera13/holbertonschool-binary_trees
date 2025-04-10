@@ -2,7 +2,7 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_node - nombre de la funcion 
+ * binary_tree_node - nombre de la funcion
  * @parent: pepe
  * @value: valor que tiene el nuevo nodo almacendo
  * Return: pepe supremo
