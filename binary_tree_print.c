@@ -13,18 +13,18 @@
  * @level: Nivel actual del nodo
  */
 static void compute_lprofile(const binary_tree_t *tree, int height,
-                             int lprofile[MAX_HEIGHT], int level)
+			     int lprofile[MAX_HEIGHT], int level)
 {
-        if (tree == NULL)
-                return;
+	if (tree == NULL)
+		return;
 
-        /* Solo registrar la primera vez que se visita un nivel */
-        if (lprofile[level] == -1)
-                lprofile[level] = height;
+	/* Solo registrar la primera vez que se visita un nivel */
+	if (lprofile[level] == -1)
+		lprofile[level] = height;
 
-        /* Recursión para ambos hijos */
-        compute_lprofile(tree->left, height + 1, lprofile, level + 1);
-        compute_lprofile(tree->right, height + 1, lprofile, level + 1);
+	/* Recursión para ambos hijos */
+	compute_lprofile(tree->left, height + 1, lprofile, level + 1);
+	compute_lprofile(tree->right, height + 1, lprofile, level + 1);
 }
 
 /**
@@ -35,18 +35,18 @@ static void compute_lprofile(const binary_tree_t *tree, int height,
  * @level: Nivel actual del nodo
  */
 static void compute_rprofile(const binary_tree_t *tree, int height,
-                             int rprofile[MAX_HEIGHT], int level)
+			     int rprofile[MAX_HEIGHT], int level)
 {
-        if (tree == NULL)
-                return;
+	if (tree == NULL)
+		return;
 
-        /* Solo registrar la primera vez que se visita un nivel */
-        if (rprofile[level] == -1)
-                rprofile[level] = height;
+	/* Solo registrar la primera vez que se visita un nivel */
+	if (rprofile[level] == -1)
+		rprofile[level] = height;
 
-        /* Recursión para ambos hijos */
-        compute_rprofile(tree->left, height + 1, rprofile, level + 1);
-        compute_rprofile(tree->right, height + 1, rprofile, level + 1);
+	/* Recursión para ambos hijos */
+	compute_rprofile(tree->left, height + 1, rprofile, level + 1);
+	compute_rprofile(tree->right, height + 1, rprofile, level + 1);
 }
 
 /**
@@ -59,22 +59,19 @@ static void compute_rprofile(const binary_tree_t *tree, int height,
  * @x: Posición del nodo a imprimir.
  */
 static void print_tree(const binary_tree_t *tree, int lprofile[MAX_HEIGHT],
-                       int rprofile[MAX_HEIGHT], int height, int level, int x)
+		       int rprofile[MAX_HEIGHT], int height, int level, int x)
 {
-        int spaces; /* Declaración de la variable 'spaces' al principio */
+	int spaces;
 
-        if (tree == NULL)
-                return;
+	if (tree == NULL)
+		return;
 
-        /* Calcula el espacio a la izquierda para la impresión */
-        spaces = rprofile[level] - lprofile[level] - 1;
+	spaces = rprofile[level] - lprofile[level] - 1;
 
-        /* Imprime el nodo actual con espacios adecuados */
-        printf("%*s(%d)", spaces, "", tree->n);
+	printf("%*s(%d)", spaces, "", tree->n);
 
-        /* Imprime los hijos izquierdo y derecho recursivamente */
-        print_tree(tree->left, lprofile, rprofile, height, level + 1, x + 1);
-        print_tree(tree->right, lprofile, rprofile, height, level + 1, x + 1);
+	print_tree(tree->left, lprofile, rprofile, height, level + 1, x + 1);
+	print_tree(tree->right, lprofile, rprofile, height, level + 1, x + 1);
 }
 
 /**
@@ -83,24 +80,22 @@ static void print_tree(const binary_tree_t *tree, int lprofile[MAX_HEIGHT],
  */
 void binary_tree_print(const binary_tree_t *tree)
 {
-        int lprofile[MAX_HEIGHT];
-        int rprofile[MAX_HEIGHT];
-        int height;
-        int i;
+	int lprofile[MAX_HEIGHT];
+	int rprofile[MAX_HEIGHT];
+	int height;
+	int i;
 
-        /* Inicializa los perfiles a -1 */
-        for (i = 0; i < MAX_HEIGHT; i++) {
-                lprofile[i] = -1;
-                rprofile[i] = -1;
-        }
+	for (i = 0; i < MAX_HEIGHT; i++)
+	{
+		lprofile[i] = -1;
+		rprofile[i] = -1;
+	}
 
-        /* Calcula la altura del árbol */
-        height = binary_tree_height(tree);
+	height = binary_tree_height(tree);
 
-        /* Calcula los perfiles izquierdo y derecho */
-        compute_lprofile(tree, 0, lprofile, 0);
-        compute_rprofile(tree, 0, rprofile, 0);
+	compute_lprofile(tree, 0, lprofile, 0);
+	compute_rprofile(tree, 0, rprofile, 0);
 
-        /* Imprime el árbol */
-        print_tree(tree, lprofile, rprofile, height, 0, 0);
+	print_tree(tree, lprofile, rprofile, height, 0, 0);
 }
+
